@@ -34,7 +34,7 @@ public class BlockCable extends Block implements ITileEntityProvider, IEnergyMes
 		this.setHardness(6F);
 		this.setResistance(5F);
 		this.setUnlocalizedName(name);
-		this.setCreativeTab(UReference.tab);
+		this.setCreativeTab(UReference.maschines);
 		this.lo = loos;
 		this.asp = sp;
 		this.setBlockBounds(0.4F, 0.4F, 0.4F, 0.6F, 0.6F, 0.6F);
@@ -91,7 +91,7 @@ public class BlockCable extends Block implements ITileEntityProvider, IEnergyMes
 	
 	@SideOnly(Side.CLIENT)
 	public boolean shouldSideBeRendered(IBlockAccess w, BlockPos pos, EnumFacing side) {
-		return side == EnumFacing.DOWN ? super.shouldSideBeRendered(w, pos, side) : true;
+		return false;
 	}
 	
 	@Override
@@ -215,11 +215,6 @@ public class BlockCable extends Block implements ITileEntityProvider, IEnergyMes
 	}
 	
 	@Override
-	public void onNeighborBlockChange(World world, BlockPos pos, IBlockState state, Block neighborBlock) {
-		((TileEntityCable) world.getTileEntity(pos)).onBlockSetInWorld();
-	}
-	
-	@Override
 	public void onBlockDestroyedByExplosion(World worldIn, BlockPos pos, Explosion explosionIn) {
 		entityClear(worldIn, pos);
 		super.onBlockDestroyedByExplosion(worldIn, pos, explosionIn);
@@ -234,7 +229,6 @@ public class BlockCable extends Block implements ITileEntityProvider, IEnergyMes
 	@Override
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
 		entityClear(worldIn, pos);
-		((TileEntityCable) worldIn.getTileEntity(pos)).onBlockBreak();
 		super.breakBlock(worldIn, pos, state);
 	}
 	

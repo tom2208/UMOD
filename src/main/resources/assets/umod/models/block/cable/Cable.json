@@ -1,60 +1,56 @@
 {
-	"textures": {
-		"particle": "umod:blocks/block/silver",
-		"0": "umod:blocks/block/silver"
-	},
-	"elements": [
+"elements": [
 		{
 			"name": "Cube",
 			"from": [
-				7.0,
-				7.0,
-				7.0
+				4.8,
+				4.8,
+				4.8
 			],
 			"to": [
-				9.0,
-				9.0,
-				9.0
+				11.2,
+				11.2,
+				11.2
 			],
 			"faces": {
 				"north": {
-					"texture": "#0",
+					"texture": "#texture",
 					"uv": [
 						0.0,
 						0.0,
 						16.0,
-						1.0
+						16.0
 					]
 				},
 				"east": {
-					"texture": "#0",
+					"texture": "#texture",
 					"uv": [
 						0.0,
 						0.0,
 						16.0,
-						1.0
+						16.0
 					]
 				},
 				"south": {
-					"texture": "#0",
+					"texture": "#texture",
 					"uv": [
 						0.0,
 						0.0,
 						16.0,
-						1.0
+						16.0
 					]
 				},
 				"west": {
-					"texture": "#0",
+					"texture": "#texture",
 					"uv": [
 						0.0,
 						0.0,
 						16.0,
-						1.0
+						16.0
 					]
 				},
 				"up": {
-					"texture": "#0",
+					"texture": "#texture",
 					"uv": [
 						0.0,
 						0.0,
@@ -63,7 +59,7 @@
 					]
 				},
 				"down": {
-					"texture": "#0",
+					"texture": "#texture",
 					"uv": [
 						0.0,
 						0.0,

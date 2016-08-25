@@ -1,7 +1,7 @@
 {
 	"variants": {
 		"normal": {
-			"model": "umod:silvercable"
+			"model": "umod:cable/low_block"
 		}
 	}
 }
