@@ -1,6 +1,9 @@
 package net.hycrafthd.umod.tileentity;
 
+import net.hycrafthd.corelib.util.*;
 import net.hycrafthd.umod.UMod;
+import net.hycrafthd.umod.api.*;
+import net.hycrafthd.umod.item.ItemBackPack;
 import net.hycrafthd.umod.utils.DirectionUtils;
 import net.minecraft.entity.player.*;
 import net.minecraft.inventory.Container;
@@ -9,7 +12,7 @@ import net.minecraft.nbt.*;
 import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.util.EnumFacing;
 
-public class TileEntityPainter extends TileEntityBase implements IUpdatePlayerListBox {
+public class TileEntityPainter extends TileEntityBase implements IUpdatePlayerListBox ,ISliderEntry, IWorldView{
 	
 	private ItemStack[] stack = new ItemStack[6];
 	
@@ -211,7 +214,12 @@ public class TileEntityPainter extends TileEntityBase implements IUpdatePlayerLi
 	
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
+		if(this.getStackInSlot(3) != null){
+			if(this.getStackInSlot(3).getItem() instanceof ItemBackPack){
+			ColorUtils.setColor(this.getStackInSlot(3), new RGBA(this.getValueFromId(0),this.getValueFromId(1),this.getValueFromId(2),this.getValueFromId(3)).toAWTColor().getRGB());
+			}
+//			if(Block.getBlockFromItem(((Slot)this.inventorySlots.get(3)).getStack().getItem()) != null && Block.getBlockFromItem(((Slot)this.inventorySlots.get(3)).getStack().getItem()) instanceof BlockConduit){}
+		}
 	}
 	
 	@Override
@@ -242,6 +250,28 @@ public class TileEntityPainter extends TileEntityBase implements IUpdatePlayerLi
 	@Override
 	public boolean isOutput() {
 		return true;
+	}
+	
+	public int[] ids = {0,0,0,100};
+
+	@Override
+	public void storeValueForId(int id, int vl) {
+		   ids[id] = vl;
+	}
+
+	@Override
+	public int getValueFromId(int id) {
+		return ids[id];
+	}
+
+	@Override
+	public boolean showPower() {
+		return true;
+	}
+
+	@Override
+	public String[] textToAdd() {
+		return null;
 	}
 	
 }

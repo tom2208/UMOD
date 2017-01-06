@@ -1,14 +1,14 @@
 package net.hycrafthd.umod;
 
-import net.hycrafthd.corelib.registry.NetworkRegistry;
 import net.hycrafthd.umod.api.ProcessHandler;
 import net.hycrafthd.umod.event.*;
+import net.hycrafthd.umod.ext.ExtensionList;
 import net.hycrafthd.umod.network.PacketHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.*;
 
-@Mod(modid = UReference.modid, version = UReference.version, name = UReference.name)
+@Mod(modid = UReference.modid, version = UReference.version, name = UReference.name, dependencies="required-after:corelib")
 public class UMod {
 	
 	public static org.apache.logging.log4j.Logger log;
@@ -16,12 +16,14 @@ public class UMod {
 	@EventHandler
 	public void preinit(FMLPreInitializationEvent event) {
 		log = event.getModLog();
+		ExtensionList.onStart(event);
 		new UConfig(event.getSuggestedConfigurationFile());
 		new PacketHandler();
 	}
 	
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
+		ExtensionList.onInit(event);
 		new UPotion();
 		new UItems();
 		new UBlocks();
@@ -37,11 +39,12 @@ public class UMod {
 	
 	@EventHandler
 	public void postinit(FMLPostInitializationEvent event) {
+		ExtensionList.onPostInit(event);
 		new UTiles();
 		new URecipes();
 		new UChestLoot();
 		new UAchievement();
-		NetworkRegistry.registerGuiHandler(new UGuiHandler());
+		net.hycrafthd.corelib.registry.NetworkRegistry.registerGuiHandler(new UGuiHandler());
 		UReference.proxy.registerModels();
 		UReference.proxy.registerRenderer();
 		UMod.log.info("Registered Mod.");
@@ -49,6 +52,7 @@ public class UMod {
 	
 	@EventHandler
 	public void serverstarting(FMLServerStartingEvent event) {
+		ExtensionList.onServer(event);
 		new UCommands(event);
 		UMod.log.info("Registered Mod Commands.");
 	}
@@ -64,6 +68,7 @@ public class UMod {
 		event.addEvent(new EventPlayerJoin());
 		event.addEvent(new EventToolTip());
 		event.addEvent(new EventOnTick());
+		event.addEvent(new EventChestInventory());
 		event.register();
 		UMod.log.info("Registered Mod Events.");
 	}

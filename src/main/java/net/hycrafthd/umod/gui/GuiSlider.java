@@ -1,10 +1,13 @@
 package net.hycrafthd.umod.gui;
 
 import net.hycrafthd.corelib.util.*;
+import net.hycrafthd.umod.network.PacketHandler;
+import net.hycrafthd.umod.network.message.*;
 import net.hycrafthd.umod.utils.StringMethod;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.util.BlockPos;
 
 public class GuiSlider extends Gui {
 	
@@ -12,14 +15,18 @@ public class GuiSlider extends Gui {
 	private RGBA back, slid, slid2;
 	private int val = 0;
 	private StringMethod ret = null;
+	private BlockPos ps;
+	private int id;
 	
-	public GuiSlider(int x, int y, RGBA color1, RGBA color2, RGBA color3, int val) {
+	public GuiSlider(int x, int y, RGBA color1, RGBA color2, RGBA color3, int id,BlockPos pos) {
 		this.x = x;
 		this.y = y;
 		back = color1;
 		slid = color2;
 		slid2 = color3;
-		this.val = val;
+		this.id = id;
+		this.ps = pos;
+		PacketHandler.INSTANCE.sendToServer(new MessageSliderRequest(id, pos));
 	}
 	
 	public void draw(Minecraft mc) {
@@ -90,9 +97,15 @@ public class GuiSlider extends Gui {
 		return val;
 	}
 	
+	public void setValue(int i){
+		val = i;
+		PacketHandler.INSTANCE.sendToServer(new MessageSliderAdd(id, val, ps));
+	}
+	
 	public void handelMouseClicked(int mousex, int mousey) {
 		if (mousex >= x && mousex <= x + 100 && mousey >= y && mousey <= y + 8) {
 			val = mousex - x;
+			PacketHandler.INSTANCE.sendToServer(new MessageSliderAdd(id, val, ps));
 		}
 	}
 }

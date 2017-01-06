@@ -38,6 +38,8 @@ public class UBlocks {
 	public static Block high_voltage_cable;
 	public static Block medium_voltage_cable;
 	public static Block low_voltage_cable;
+	
+	public static Block itempipe_normal;
 	//magic crafter
 	public static Block magic_crafter;
 	public static Block magic_glass;
@@ -50,10 +52,13 @@ public class UBlocks {
 	public static Block rail;
 	public static Block rail2;
 	
+	public static Block blockbreaker;
+	
 	// Stairs
 	public static BlockStairCreator[] stonestairs;
 	public static BlockStairCreator[] woolstairs;
 	public static BlockStairCreator[] claystairs;
+	
 	// Slabs
 	public static BlockSlabCreator[] stoneslabs;
 	
@@ -96,11 +101,15 @@ public class UBlocks {
 		high_voltage_cable = new BlockCable("high_voltage_cable", 62, 62, false, "high_voltage_cable");
 		medium_voltage_cable = new BlockCable("medium_voltage_cable", 38, 38, false, "medium_voltage_cable");
 		low_voltage_cable = new BlockCable("low_voltage_cable", 9, 9, false, "low_voltage_cable");
+		
+		itempipe_normal = new BlockItemPipe("normal_item_pipe").setUnlocalizedName("itempipe_normal");
 		// Normal Blocks
 		nuke = new BlockNuke().setUnlocalizedName("nuke");
 		conduit = new BlockConduit().setUnlocalizedName("conduit");
 		
 		barrels = new BlockBarrels().setUnlocalizedName("barrels");
+		
+		blockbreaker = new BlockBreaker().setUnlocalizedName("blockbreacker");
 		
 		rail = new BlockExtendedRail().setUnlocalizedName("ExRail");
 		rail2 = new Block2rail().setUnlocalizedName("railhelp");
@@ -127,6 +136,7 @@ public class UBlocks {
 		for (int i = 0; i < BlockStone.EnumType.values().length; i++) {
 			stoneslabs[i] = new BlockSlabCreator(Blocks.stone.getDefaultState().withProperty(BlockStone.VARIANT, BlockStone.EnumType.byMetadata(i)), "stone_" + BlockStone.EnumType.byMetadata(i).getName());
 		}
+		
 		UMod.log.debug("Init Blocks");
 	}
 	
@@ -165,6 +175,8 @@ public class UBlocks {
 		URegistryUtils.registerBlock(medium_voltage_cable, ItemBlockEnergy.class);
 		URegistryUtils.registerBlock(high_voltage_cable, ItemBlockEnergy.class);
 		URegistryUtils.registerBlock(low_voltage_cable, ItemBlockEnergy.class);
+		
+		URegistryUtils.registerBlock(itempipe_normal, ItemBlockBase.class);
 		// Normal Block
 		URegistryUtils.registerBlock(nuke);
 		URegistryUtils.registerBlock(conduit, ItemBlockConduit.class);
@@ -173,6 +185,8 @@ public class UBlocks {
 		
 		URegistryUtils.registerBlock(rail);
 		URegistryUtils.registerBlock(rail2);
+		
+		URegistryUtils.registerBlock(blockbreaker);
 		
 		// Stairs
 		for (BlockStairCreator creator : stonestairs) {

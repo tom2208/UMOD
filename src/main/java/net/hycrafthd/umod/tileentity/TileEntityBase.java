@@ -64,9 +64,6 @@ public abstract class TileEntityBase extends TileEntity implements ISidedInvento
 		NBTTagCompound tagSonstiges = new NBTTagCompound();
 		this.writeOtherToNBT(tagSonstiges);
 		compound.setTag(OTHER_NBT, tagSonstiges);
-		/**
-		 * @author MrTroble <strong>IMPORTANT</strong>: have to be last
-		 */
 		NBTTagCompound tagItems = new NBTTagCompound();
 		this.writeItemsToNBT(tagItems);
 		compound.setTag(ITEM_NBT, tagItems);
@@ -127,16 +124,6 @@ public abstract class TileEntityBase extends TileEntity implements ISidedInvento
 	@Override
 	public double getPower(double powerneed) {
 		return 0;
-	}
-	
-	@Override
-	public boolean canGetPower(BlockPos p, double power) {
-		return false;
-	}
-	
-	@Override
-	public boolean canAddPower(BlockPos p, double power) {
-		return strpo + power <= MAXIMUM_POWER;
 	}
 	
 	@Override

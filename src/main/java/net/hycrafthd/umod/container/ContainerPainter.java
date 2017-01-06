@@ -15,8 +15,9 @@ public class ContainerPainter extends ContainerBase {
 		super.addSlotToContainer(new ColorSlot(Color.red, (IInventory) ent, 0, 13, 11));
 		super.addSlotToContainer(new ColorSlot(Color.green, (IInventory) ent, 1, 13, 32));
 		super.addSlotToContainer(new ColorSlot(Color.blue, (IInventory) ent, 2, 13, 53));
-		super.addSlotToContainer(new BaseSlotOutput((IInventory) ent, 3, 146, 10));
-		
+		super.addSlotToContainer(new BaseCraftSlot((IInventory) ent, 3, 146, 11));
+		super.addSlotToContainer(new BaseCraftSlot((IInventory) ent, 4, 146, 32));
+
 		int i = 0;
 		int v = 9;
 		int j = 0;
@@ -30,5 +31,5 @@ public class ContainerPainter extends ContainerBase {
 			super.addSlotToContainer(new Slot(pl.inventory, i, 8 + i * 18, 142));
 		}
 	}
-	
+
 }

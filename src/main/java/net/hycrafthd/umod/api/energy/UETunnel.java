@@ -84,14 +84,8 @@ public class UETunnel extends ArrayList<BlockPos> {
 	
 	public void onTick(){
 		if(TunnelHolder.remove(id))return;
-		System.out.println("======TUNNEL======");
-		System.out.println("ID:" + this.id);
-		System.out.println("HOLDING:" + this.size());
 		ICabel[] outs = this.getOutput();
 		ICabel[] inpts = this.getInput();
-		System.out.println("OUTPUTS:" + outs.length);
-		System.out.println("INPUTS:" + inpts.length);
-		System.out.println("==================");
 		double max = 0;
 		for(ICabel cab : inpts){
 			for(BlockPos p : cab.getInputs()){
